@@ -23,7 +23,7 @@ runs:
       run: |
         echo "#!/usr/bin/env kotlin" >> ${{ inputs.file }}
         SCRIPT=${{ inputs.script }}
-        echo ${SCRIPT@Q} >> ${{ inputs.file }}
+        echo ${SCRIPT} >> ${{ inputs.file }}
         chmod +x ${{ inputs.file }}
       shell: bash
     
