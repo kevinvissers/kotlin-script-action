@@ -21,8 +21,9 @@ runs:
     - name: Generate script file
       if: ${{ inputs.script != '' }}
       run: |
-        echo ${{ inputs.script }} >> ${{ inputs.file }}
+        ${{ inputs.script }} >> ${{ inputs.file }}
         chmod +x ${{ inputs.file }}
+        cat ${{ inputs.file }}
       shell: bash
       
     - name: Run Kotlin script
