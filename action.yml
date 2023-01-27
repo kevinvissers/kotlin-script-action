@@ -1,1 +1,31 @@
-Name: Run Kotlin Script
+name: 'Kotlin Script'
+description: 'Run a Kotlin script'
+
+branding:
+  icon: 'code'
+  color: 'blue'
+  
+inputs:
+  script:
+    description: 'Script to execute'
+    required: false
+    default: ''
+  file:
+    description: 'kts file to run'
+    required: false
+    default: 'default.main.kts'
+    
+runs:
+  using: "composite"
+  steps:
+    - name: Generate script file
+      if: ${{ inputs.script !== '' }}
+      run: |
+        echo ${{ inputs.script }} >> ${{ inputs.file }}
+        chmod +x ${{ inputs.file }}
+      shell: bash
+      
+    - name: Run Kotlin script
+      run: kotlinc -script ./${{ inputs.file }}
+      shell: bash
+     
