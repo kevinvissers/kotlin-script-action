@@ -18,12 +18,20 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/github-script@v6
+      id: set-result
+      with:
+        script: return ${{ inputs.script }}
+        result-encoding: string
+    - name: Get result
+      run: echo "${{steps.set-result.outputs.result}}"
+      
     - name: Generate script file
       if: ${{ inputs.script != '' }}
       run: |
         echo "#!/usr/bin/env kotlin" >> ${{ inputs.file }}
-        SCRIPT="${{ inputs.script }}"
-        echo ${SCRIPT} >> ${{ inputs.file }}
+        SCRIPT='${{ inputs.script }}'
+        echo '${SCRIPT}' >> ${{ inputs.file }}
         chmod +x ${{ inputs.file }}
       shell: bash
     
