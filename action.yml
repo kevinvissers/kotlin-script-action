@@ -21,11 +21,18 @@ runs:
     - name: Generate script file
       if: ${{ inputs.script != '' }}
       run: |
-        ${{ inputs.script }} >> ${{ inputs.file }}
+        echo "#!/usr/bin/env kotlin" >> ${{ inputs.file }}
+        echo "${{ inputs.script }}" >> ${{ inputs.file }}
         chmod +x ${{ inputs.file }}
+      shell: bash
+    
+    - name: Validate file
+      if: ${{ inputs.script != '' }}
+      run: |
+        ls -a
         cat ${{ inputs.file }}
       shell: bash
-      
+    
     - name: Run Kotlin script
       run: kotlinc -script ./${{ inputs.file }}
       shell: bash
