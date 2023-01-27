@@ -1,0 +1,17 @@
+name: Test Kotlin Script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run simple script
+        uses: ./
+        with:
+          script: |
+            println("hello world")
