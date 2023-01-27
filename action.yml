@@ -22,7 +22,7 @@ runs:
       if: ${{ inputs.script != '' }}
       run: |
         echo "#!/usr/bin/env kotlin" >> ${{ inputs.file }}
-        SCRIPT=${{ inputs.script }}
+        SCRIPT="${{ inputs.script }}"
         echo ${SCRIPT} >> ${{ inputs.file }}
         chmod +x ${{ inputs.file }}
       shell: bash
