@@ -19,7 +19,7 @@ runs:
   using: "composite"
   steps:
     - name: Generate script file
-      if: ${{ inputs.script !== '' }}
+      if: ${{ inputs.script != '' }}
       run: |
         echo ${{ inputs.script }} >> ${{ inputs.file }}
         chmod +x ${{ inputs.file }}
